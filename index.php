@@ -1,3 +1,25 @@
+<?php
+session_start();
+include('includes/dbconnection.php');
+
+if(isset($_POST['login']))
+  {
+    $uname=$_POST['username'];
+    $Password=$_POST['Password'];
+    $query=mysqli_query($con,"select ID from tbladmin where  AdminuserName='$uname' && Password='$Password' ");
+    $ret=mysqli_fetch_array($query);
+    if($ret>0){
+      $_SESSION['aid']=$ret['ID'];
+     header('location:welcome.php');
+    }
+    else{
+      echo "Invalid Details";
+    }
+  }
+  ?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,155 +27,79 @@
 
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
+  <meta name="viewport" content="Employee Record management System in php and mysql">
+  <meta name="description" content="Employee Record management System in php and mysql">
+  <meta name="author" content="Sarita Pandey">
 
-  <title>ERMS | Home Page</title>
+  <title>ERMS Admin Login</title>
 
   <!-- Custom fonts for this template-->
-  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
   <!-- Custom styles for this template-->
-  <link href="css/sb-admin-2.min.css" rel="stylesheet">
+  <link href="../css/sb-admin-2.min.css" rel="stylesheet">
 
 </head>
 
-<body id="page-top">
+<body class="bg-gradient-primary">
 
-  <!-- Page Wrapper -->
-  <div id="wrapper" >
+  <div class="container">
+      <h3 align="center" style="color: black; padding-top: 2%">Employee Record Managment System</h3>
 
-  
+    <!-- Outer Row -->
+    <div class="row justify-content-center">
 
-    <!-- Content Wrapper -->
-    <div id="content-wrapper" class="d-flex flex-column">
+      <div class="col-xl-10 col-lg-12 col-md-9">
 
-      <!-- Main Content -->
-      <div id="content">
+        <div class="card o-hidden border-0 shadow-lg my-5">
+          <div class="card-body p-0">
+            <!-- Nested Row within Card Body -->
+            <div class="row">
+              <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+              <div class="col-lg-6">
+                <div class="p-5">
+                  <div class="text-center">
+                    <h1 class="h4 text-gray-900 mb-4">Admin login!</h1>
+                  </div>
+                  <form class="user" method="post" action="">
+                    <div class="form-group">
+                      <input type="test" class="form-control form-control-user" id="username" name="username" aria-describedby="emailHelp" required="true" placeholder="Enter username ...">
+                    </div>
+                    <div class="form-group">
+                      <input type="password" class="form-control form-control-user" id="Password" name="Password" placeholder="Password" required="true">
+                    </div>
+                    
+                  
+                    <p> <input type="submit" class="btn btn-primary btn-user btn-block" name="login" value="login"></p>
 
-       
-        <!-- Begin Page Content -->
-        <div class="container-fluid">
-
-          <!-- Page Heading -->
-          <div class="d-sm-flex align-items-center justify-content-between mb-4" style="margin-top: 2%">
-            <h1 class="h3 mb-0 text-gray-800">Employee Record Management System</h1>
+                    <hr>
+                  
+                  </form>
+                  <hr>
+                 
+                 
+                </div>
+              </div>
+            </div>
           </div>
-
-          <div class="row">
-
-            <!-- Earnings (Monthly) Card Example -->
-          
-            <div class="col-xl-4 col-md-6 mb-4">
-              <div class="card border-left-primary shadow h-100 py-2">
-                <div class="card-body">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">  <a href="loginerms.php">
-                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">User Signin</div>
-                      </a>
-                    </div>
-                    <div class="col-auto">
-                      <i class="fas fa-user fa-2x text-gray-300"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-
-            <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-4 col-md-6 mb-4">
-              <div class="card border-left-success shadow h-100 py-2">
-                <div class="card-body">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                      <a href="registererms.php">
-                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">User Signup</div>
-                 </a>
-                    </div>
-                    <div class="col-auto">
-                      <i class="fas fa-user fa-2x text-gray-300"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-4 col-md-6 mb-4">
-              <div class="card border-left-info shadow h-100 py-2">
-                <div class="card-body">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                        <a href="admin/">
-                      <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Admin Login</div>
-                   </a>
-                    </div>
-                    <div class="col-auto">
-                      <i class="fas fa-user fa-2x text-gray-300"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Pending Requests Card Example -->
-          
-          </div>
-
-         
-
         </div>
-        <!-- /.container-fluid -->
 
       </div>
-      <!-- End of Main Content -->
-
-      <!-- Footer -->
-    <?php include_once('includes/footer.php');?>
-      <!-- End of Footer -->
 
     </div>
-    <!-- End of Content Wrapper -->
 
-  </div>
-  <!-- End of Page Wrapper -->
-
-  <!-- Scroll to Top Button-->
-  <a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-  </a>
-
-  <!-- Logout Modal-->
-  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-          </button>
-        </div>
-        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-        <div class="modal-footer">
-          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <a class="btn btn-primary" href="login.html">Logout</a>
-        </div>
-      </div>
-    </div>
   </div>
 
   <!-- Bootstrap core JavaScript-->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../vendor/jquery/jquery.min.js"></script>
+  <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   <!-- Core plugin JavaScript-->
-  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
 
   <!-- Custom scripts for all pages-->
-  <script src="js/sb-admin-2.min.js"></script>
+  <script src="../js/sb-admin-2.min.js"></script>
 
 </body>
 
